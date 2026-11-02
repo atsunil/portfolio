@@ -1,0 +1,22 @@
+name: Deploy Portfolio Locally
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Web Root / Service
+        run: |
+          echo "Running deployment on college PC..."
+          # If using a simple static folder served by Caddy or Python:
+          # The runner checks out your repository inside its _work directory.
+          # You can copy the files to your active web directory here:
+          mkdir -p /home/atomic/portfolio_public
+          cp -r * /home/atomic/portfolio_public/
+          echo "Deployment complete!"
